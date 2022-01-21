@@ -1,19 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var loadImage = document.querySelectorAll("img.lazy");
-  var timeOut;
+  const loadImage = document.querySelectorAll("img.lazy");
+  let timeOut;
 
   function lazyload() {
-    if (timeOut) {
-      clearTimeout(timeOut);
-    }
 
     timeOut = setTimeout(function () {
-      var scrollTop = window.pageYOffset;
+      let scrollTop = window.pageYOffset;
+      console.log(scrollTop + ":" + window.innerHeight);
+
       loadImage.forEach(function (img) {
         if (img.offsetTop < (window.innerHeight + scrollTop)) {
           img.src = img.dataset.src;
           img.classList.remove('lazy');
-          console.log(img.offsetTop);
 
         }
       });
@@ -21,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.removeEventListener("scroll", lazyload);
 
       }
-    }, 1000);
+    }, 2000);
   }
 
   document.addEventListener("scroll", lazyload);
